@@ -18,6 +18,7 @@ runs:
       uses: aquasecurity/trivy-action@master
       with:
         scan-type: fs
+        scanners: 'vuln,secret,misconfig'
         scan-ref: .
         format: table
         severity: LOW,MEDIUM,CRITICAL,HIGH
