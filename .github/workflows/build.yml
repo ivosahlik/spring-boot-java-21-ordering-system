@@ -25,5 +25,6 @@ jobs:
       - name: Run Trivy Security Scan
         uses: ./.github/actions/trivy
         with:
+#          image: ''
           scan-path: '.'
 

@@ -1,9 +1,9 @@
 name: 'Trivy Scan'
 description: 'Run Trivy scan using aquasecurity/trivy-action'
 inputs:
-  image:
-    description: 'Docker image to scan'
-    required: true
+#  image:
+#    description: 'Docker image to scan'
+#    required: true
   severity:
     description: 'Severity levels to report'
     required: false
@@ -22,11 +22,16 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - name: Manual Trivy Setup
+      uses: aquasecurity/setup-trivy@v0.2.0
+      with:
+        cache: true
+        version: v0.63.0
     - name: Run Trivy scan
       id: trivy-scan
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: ${{ inputs.image }}
+#        image-ref: ${{ inputs.image }}
         severity: ${{ inputs.severity }}
         scan-ref: ${{ inputs.scan-path }}
     - name: Set output
