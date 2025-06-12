@@ -9,7 +9,7 @@ inputs:
     required: false
     default: 'HIGH,CRITICAL'
   ignorefile:
-    description: 'Path to .trivyignore file'
+    description: 'Path to .gitignore file'
     required: false
     default: '.gitignore'
 outputs:
