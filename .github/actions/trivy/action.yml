@@ -3,7 +3,7 @@ description: 'Run Trivy scan using aquasecurity/trivy-action'
 inputs:
   image:
     description: 'Docker image to scan'
-    required: true
+    required: false
   severity:
     description: 'Severity levels to report'
     required: false
