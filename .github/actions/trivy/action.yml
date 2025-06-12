@@ -1,0 +1,22 @@
+name: 'Trivy Vulnerability Scanner'
+description: 'Scan project for vulnerabilities using Trivy'
+inputs:
+  scan-path:
+    description: 'Path to scan (file or directory)'
+    required: false
+    default: '.'
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Trivy
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget
+        wget -qO- https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.50.2_Linux-64bit.tar.gz | tar zxvf -
+        sudo mv trivy /usr/local/bin/
+    - name: Run Trivy scan
+      shell: bash
+      run: |
+        trivy fs --exit-code 1 --severity CRITICAL,HIGH ${{ inputs.scan-path }}
+
