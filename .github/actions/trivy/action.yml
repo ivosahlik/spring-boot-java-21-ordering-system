@@ -16,5 +16,3 @@ runs:
     - name: Run Trivy scan
       id: trivy-scan
       uses: aquasecurity/trivy-action@master
-      with:
-        scan-ref: "./.."
