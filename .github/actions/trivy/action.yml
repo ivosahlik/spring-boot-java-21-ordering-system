@@ -1,22 +1,30 @@
-name: 'Trivy Vulnerability Scanner'
-description: 'Scan project for vulnerabilities using Trivy'
+name: 'Trivy Scan'
+description: 'Run Trivy scan using aquasecurity/trivy-action'
 inputs:
-  scan-path:
-    description: 'Path to scan (file or directory)'
+  image:
+    description: 'Docker image to scan'
+    required: true
+  severity:
+    description: 'Severity levels to report'
     required: false
-    default: '.'
+    default: 'HIGH,CRITICAL'
+  ignorefile:
+    description: 'Path to .trivyignore file'
+    required: false
+    default: '.gitignore'
+outputs:
+  report:
+    description: 'Path to the Trivy scan report'
 runs:
   using: 'composite'
   steps:
-    - name: Install Trivy
-      shell: bash
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget
-        wget -qO- https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.50.2_Linux-64bit.tar.gz | tar zxvf -
-        sudo mv trivy /usr/local/bin/
     - name: Run Trivy scan
+      id: trivy-scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ${{ inputs.image }}
+        severity: CRITICAL,HIGH
+        ignorefile: ${{ inputs.ignorefile }}
+    - name: Set output
       shell: bash
-      run: |
-        trivy fs --exit-code 1 --severity CRITICAL,HIGH ${{ inputs.scan-path }}
-
+      run: echo "report=${{ steps.trivy-scan.outputs.report }}" >> $GITHUB_OUTPUT
