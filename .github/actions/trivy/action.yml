@@ -20,4 +20,4 @@ runs:
         scan-type: fs
         scan-ref: .
         format: table
-        severity: CRITICAL,HIGH
+        severity: LOW,MEDIUM,CRITICAL,HIGH
