@@ -9,9 +9,9 @@ inputs:
     required: false
     default: 'LOW,MEDIUM,HIGH,CRITICAL'
   ignorefile:
-    description: 'Path to .gitignore file'
+    description: 'Path to .trivyignore file'
     required: false
-    default: '.gitignore'
+    default: '.trivyignore'
 outputs:
   report:
     description: 'Path to the Trivy scan report'
@@ -22,9 +22,8 @@ runs:
       id: trivy-scan
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: ${{ inputs.image }}
-        severity: CRITICAL,HIGH
-        ignorefile: ${{ inputs.ignorefile }}
+#        image-ref: ${{ inputs.image }}
+        severity: ${{ inputs.severity }}
     - name: Set output
       shell: bash
       run: echo "report=${{ steps.trivy-scan.outputs.report }}" >> $GITHUB_OUTPUT
