@@ -12,9 +12,13 @@ inputs:
     description: 'Path to .trivyignore file'
     required: false
     default: '.trivyignore'
+  scan-path:
+    description: 'Scan path'
+    required: false
 outputs:
   report:
     description: 'Path to the Trivy scan report'
+    value:
 runs:
   using: 'composite'
   steps:
@@ -24,6 +28,7 @@ runs:
       with:
 #        image-ref: ${{ inputs.image }}
         severity: ${{ inputs.severity }}
+        scan-ref: ${{ inputs.scan-path }}
     - name: Set output
       shell: bash
       run: echo "report=${{ steps.trivy-scan.outputs.report }}" >> $GITHUB_OUTPUT
