@@ -1,0 +1,14 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:14.3-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+networks:
+  default:
+    driver: bridge
+
