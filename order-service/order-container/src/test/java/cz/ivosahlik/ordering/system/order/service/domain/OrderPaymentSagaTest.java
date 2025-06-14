@@ -47,7 +47,7 @@ class OrderPaymentSagaTest {
     @Test
     void testDoublePayment() {
         orderPaymentSaga.process(getPaymentResponse());
-//        orderPaymentSaga.process(getPaymentResponse());
+        orderPaymentSaga.process(getPaymentResponse());
     }
 
     @Test
