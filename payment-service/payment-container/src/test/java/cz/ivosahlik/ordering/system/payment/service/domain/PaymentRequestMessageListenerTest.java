@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 @SpringBootTest(classes = PaymentServiceApplication.class)
-public class PaymentRequestMessageListenerTest {
+class PaymentRequestMessageListenerTest {
 
     @Autowired
     private PaymentRequestMessageListener paymentRequestMessageListener;
@@ -35,8 +35,8 @@ public class PaymentRequestMessageListenerTest {
     @Autowired
     private OrderOutboxJpaRepository orderOutboxJpaRepository;
 
-    private final static String CUSTOMER_ID = "d215b5f8-0249-4dc5-89a3-51fd148cfb41";
-    private final static BigDecimal PRICE = new BigDecimal("100");
+    private static final String CUSTOMER_ID = "d215b5f8-0249-4dc5-89a3-51fd148cfb41";
+    private static final BigDecimal PRICE = new BigDecimal("100");
 
     @Test
     void testDoublePayment() {
